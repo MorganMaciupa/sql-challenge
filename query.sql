@@ -74,3 +74,16 @@ select last_name, count(last_name) as "count"
 from employees
 group by last_name
 order by count desc;
+
+-- BONUS: 
+-- Create view from query for average salary
+CREATE VIEW salary_by_title AS
+SELECT t.title, AVG(s.salary) AS avg_salary
+FROM salaries as s
+JOIN employees as e on (e.emp_no = s.emp_no)
+  JOIN titles as t on (e.emp_title_id = t.title_id)
+    GROUP BY t.title;
+
+-- Epilogue
+select * from employees
+where emp_no = 499942
